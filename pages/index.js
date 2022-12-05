@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 function Homepage() {
@@ -25,9 +25,14 @@ function Homepage() {
       address: "LKH 6754",
     },
   ];
+  const [loadedMeetups, setloadedMeetups] = useState([]);
+
+  useState(() => {
+    setloadedMeetups(Dummy_meetup);
+  }, []);
   return (
     <div>
-      <MeetupList meetups={Dummy_meetup} />
+      <MeetupList meetups={loadedMeetups} />
     </div>
   );
 }
