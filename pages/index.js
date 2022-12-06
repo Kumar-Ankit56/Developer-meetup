@@ -1,32 +1,41 @@
-import React from "react";
-export const getStaticProps = async () => {
-  const res = await fetch("https://dummyjson.com/users");
-  const data = await res.json();
-
-  return {
-    props: {
-      ninjas: data,
-    },
-  };
-};
-
-function HomeContent({ ninjas }) {
+import React, { useState } from "react";
+import MeetupList from "../components/meetups/MeetupList";
+const Dummy_meetup = [
+  {
+    id: "m1",
+    image:
+      "https://th.bing.com/th/id/OIP.TUDe74-_OR6O3P4V-3_FYQHaE7?pid=ImgDet&rs=1",
+    title: "The first Meetup",
+    address: "LKH 6754",
+  },
+  {
+    id: "m2",
+    image:
+      "https://th.bing.com/th/id/OIP.TUDe74-_OR6O3P4V-3_FYQHaE7?pid=ImgDet&rs=1",
+    title: "The second Meetup",
+    address: "LKH 6754",
+  },
+  {
+    id: "m3",
+    image:
+      "https://th.bing.com/th/id/OIP.TUDe74-_OR6O3P4V-3_FYQHaE7?pid=ImgDet&rs=1",
+    title: "The Third Meetup",
+    address: "LKH 6754",
+  },
+];
+function Homepage(props) {
   return (
     <div>
-      <h1>ALl ninja</h1>
-      {/* {console.log(ninjas)} */}
-      {ninjas.users.map((ninja) => (
-        <h1 key={ninja.id}>{ninja.firstName}</h1>
-      ))}
-      {/* {ninjas.map((ninja) => (
-        <div key={ninja.id}>
-          <a href="/">
-            <h3>{ninja.name}</h3>
-          </a>
-        </div>
-      ))} */}
+      <MeetupList meetups={props.meetups} />
     </div>
   );
 }
+export async function getStaticProps() {
+  return {
+    props: {
+      meetups: Dummy_meetup,
+    },
+  };
+}
 
-export default HomeContent;
+export default Homepage;
